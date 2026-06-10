@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Nordic Hearth design tokens */
+  --color-bg: #f9f9f7;
+  --color-sidebar-bg: #ffffff;
+  --color-text-primary: #1a1c1b;
+  --color-text-secondary: #444748;
+  --color-text-muted: #9a9b9b;
+  --color-border: rgba(26, 28, 27, 0.1);
+  --color-nav-active-bg: #f0ece5;
+  --color-accent: #8b6b47;
+  --color-accent-light: rgba(139, 107, 71, 0.08);
+
+  /* Status colors */
+  --color-status-processing: #f59e0b;
+  --color-status-shipped: #3b82f6;
+  --color-status-delivered: #22c55e;
+  --color-status-cancelled: #ef4444;
+  --color-status-pending: #9ca3af;
+  --color-status-confirmed: #8b5cf6;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-inter);
+  --font-brand: var(--font-molengo);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }

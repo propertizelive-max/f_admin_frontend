@@ -402,3 +402,30 @@ export interface GetSalesAnalyticsParams {
   fromDate?: string;
   toDate?: string;
 }
+
+// ─── Contact ──────────────────────────────────────────────────────────────────
+
+export enum ContactStatus {
+  NEW = 'new',
+  READ = 'read',
+  REPLIED = 'replied',
+}
+
+export interface ContactResponse {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  subject: string;
+  message: string;
+  status: ContactStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface GetContactsParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: ContactStatus;
+}

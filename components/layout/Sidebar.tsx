@@ -50,6 +50,15 @@ function OrdersIcon({ className }: { className?: string }) {
   );
 }
 
+function ContactsIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 3h14a1 1 0 011 1v9a1 1 0 01-1 1H2a1 1 0 01-1-1V4a1 1 0 011-1z" fill="currentColor" opacity="0.3" />
+      <path d="M1 4l8 6 8-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function SettingsIcon({ className }: { className?: string }) {
   return (
     <svg className={className} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +94,8 @@ const mainNav = [
   { label: "Analytics", href: ROUTES.ANALYTICS.OVERVIEW, icon: AnalyticsIcon, match: "/analytics" },
   { label: "Categories", href: ROUTES.CATEGORIES.LIST, icon: CategoriesIcon, match: "/categories" },
   { label: "Products", href: ROUTES.PRODUCTS.LIST, icon: ProductsIcon, match: "/products" },
-  { label: "Orders", href: ROUTES.ORDERS.LIST, icon: OrdersIcon, match: "/orders" },
+  { label: "Orders",   href: ROUTES.ORDERS.LIST,   icon: OrdersIcon,   match: "/orders" },
+  { label: "Contacts", href: ROUTES.CONTACTS.LIST, icon: ContactsIcon, match: "/contacts" },
 ];
 
 const footerNav = [

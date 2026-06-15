@@ -26,4 +26,9 @@ export const ROUTES = {
     LIST: "/orders",
     DETAILS: (id: string) => `/orders/${id}`,
   },
+
+  CONTACTS: {
+    LIST: "/contacts",
+    DETAILS: (id: string) => `/contacts/${id}`,
+  },
 } as const;

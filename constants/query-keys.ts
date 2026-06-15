@@ -23,4 +23,10 @@ export const QUERY_KEYS = {
     DETAIL: (id: string) => ["orders", id] as const,
     ITEMS: (id: string) => ["orders", id, "items"] as const,
   },
+
+  CONTACTS: {
+    ALL: ["contacts"] as const,
+    LIST: (params?: object) => ["contacts", "list", params] as const,
+    DETAIL: (id: string) => ["contacts", id] as const,
+  },
 } as const;

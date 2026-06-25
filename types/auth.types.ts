@@ -9,11 +9,6 @@ export interface User {
   createdAt: string;
 }
 
-export interface AuthTokens {
-  accessToken: string;
-  refreshToken: string;
-}
-
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -21,6 +16,5 @@ export interface LoginCredentials {
 
 export interface AuthState {
   user: User | null;
-  tokens: AuthTokens | null;
   isAuthenticated: boolean;
 }

@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/utils/cn";
 import { ROUTES } from "@/constants/routes";
+import { useAuthStore } from "@/store/auth.store";
+import { authApi } from "@/features/auth/services/auth.api";
 
 // ── Icons ────────────────────────────────────────────────────────────────────
 
@@ -107,6 +109,21 @@ const footerNav = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, clearAuth } = useAuthStore();
+
+  const initials = user?.name
+    ?.split(" ")
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2) ?? "AD";
+
+  async function handleLogout() {
+    await authApi.logout();
+    clearAuth();
+    router.push("/login");
+  }
 
   return (
     <aside
@@ -192,15 +209,18 @@ export function Sidebar() {
             className="w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-semibold text-white shrink-0"
             style={{ background: "var(--color-accent)" }}
           >
-            ES
+            {initials}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-medium text-[#1a1c1b] truncate">Admin</p>
+            <p className="text-[13px] font-medium text-[#1a1c1b] truncate">
+              {user?.name ?? "Admin"}
+            </p>
             <p className="text-[11px] tracking-wider" style={{ color: "var(--color-text-muted)" }}>
-              ADMINISTRATOR
+              {user?.role?.toUpperCase() ?? "ADMINISTRATOR"}
             </p>
           </div>
           <button
+            onClick={handleLogout}
             className="shrink-0 p-1 rounded hover:bg-[var(--color-accent-light)] transition-colors"
             style={{ color: "var(--color-text-muted)" }}
             title="Sign out"

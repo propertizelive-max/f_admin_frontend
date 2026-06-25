@@ -1,4 +1,4 @@
-export { authApi, type LoginResponse } from "./services/auth.api";
+export { authApi } from "./services/auth.api";
 export { useLogin } from "./hooks/useLogin";
-export { useGoogleCallback } from "./hooks/useGoogleCallback";
+export { useAuthBootstrap } from "./hooks/useAuthBootstrap";
 export { loginSchema, type LoginFormValues } from "./schemas/login.schema";

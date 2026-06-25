@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import type { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useLogin } from "@/features/auth";
 import { loginSchema, type LoginFormValues } from "@/features/auth";
 import { ROUTES } from "@/constants/routes";
@@ -75,10 +75,14 @@ export function LoginForm() {
       await mutateAsync(values);
       router.push(ROUTES.DASHBOARD);
     } catch (err) {
-      const axiosErr = err as AxiosError<{ message: string | string[] }>;
-      const raw = axiosErr.response?.data?.message;
-      const msg = Array.isArray(raw) ? raw[0] : raw;
-      setServerError(msg ?? "Invalid email or password.");
+      if (!axios.isAxiosError(err) && err instanceof Error) {
+        setServerError(err.message);
+      } else {
+        const axiosErr = err as AxiosError<{ message: string | string[] }>;
+        const raw = axiosErr.response?.data?.message;
+        const msg = Array.isArray(raw) ? raw[0] : raw;
+        setServerError(msg ?? "Invalid email or password.");
+      }
     }
   }
 

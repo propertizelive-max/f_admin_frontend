@@ -1,17 +1,20 @@
 import { apiClient } from "@/lib/api/axios";
-import type { LoginCredentials } from "@/types";
-
-export interface LoginResponse {
-  accessToken: string;
-  refreshToken?: string;
-  user: {
-    id: string;
-    name: string;
-    email: string;
-  };
-}
+import type { LoginCredentials, UserResponse } from "@/types";
 
 export const authApi = {
-  login: (credentials: LoginCredentials): Promise<LoginResponse> =>
-    apiClient.post<LoginResponse>("/user/signin", credentials).then((r) => r.data),
+  login: async (credentials: LoginCredentials): Promise<UserResponse> => {
+    await apiClient.post("/auth/login", credentials);
+    return apiClient.get<UserResponse>("/user/profile").then((r) => r.data);
+  },
+
+  getProfile: (): Promise<UserResponse> =>
+    apiClient.get<UserResponse>("/user/profile").then((r) => r.data),
+
+  logout: async (): Promise<void> => {
+    try {
+      await apiClient.post("/auth/logout");
+    } catch {
+      // Best-effort — server-side cookie clearing; proceed regardless
+    }
+  },
 };

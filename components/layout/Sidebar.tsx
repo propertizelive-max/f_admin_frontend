@@ -96,7 +96,7 @@ const mainNav = [
   { label: "Analytics", href: ROUTES.ANALYTICS.OVERVIEW, icon: AnalyticsIcon, match: "/analytics" },
   { label: "Categories", href: ROUTES.CATEGORIES.LIST, icon: CategoriesIcon, match: "/categories" },
   { label: "Products", href: ROUTES.PRODUCTS.LIST, icon: ProductsIcon, match: "/products" },
-  { label: "Orders",   href: ROUTES.ORDERS.LIST,   icon: OrdersIcon,   match: "/orders" },
+  { label: "Orders", href: ROUTES.ORDERS.LIST, icon: OrdersIcon, match: "/orders" },
   { label: "Contacts", href: ROUTES.CONTACTS.LIST, icon: ContactsIcon, match: "/contacts" },
 ];
 
@@ -120,9 +120,12 @@ export function Sidebar() {
     .slice(0, 2) ?? "AD";
 
   async function handleLogout() {
-    await authApi.logout();
-    clearAuth();
-    router.push("/login");
+    try {
+      await authApi.logout();
+    } finally {
+      clearAuth();
+      router.replace("/login");
+    }
   }
 
   return (
